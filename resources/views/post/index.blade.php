@@ -10,9 +10,6 @@
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
                 Blog Posts
             </h1>
-            <p class="text-slate-500 mt-2">
-                Kelola, cari, dan lihat semua postingan kamu.
-            </p>
         </div>
 
         <a href="{{ route('post.create') }}"

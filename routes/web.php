@@ -3,7 +3,12 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
 // Halaman utama
 Route::get('/', function () {
@@ -19,6 +24,13 @@ Route::get('/post/profile-saya', function () {
     return view('post.profile-saya');
 })->middleware('auth')->name('post.profile-saya');
 
+Route::prefix('post')->name('post.')->middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+    // route resource projects, categories, technologies tetap di bawahnya
+});
+
 // Route CRUD Blog Posts (wajib login)
 Route::resource('post', PostController::class)
     ->middleware('auth');
@@ -33,6 +45,7 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+
 });
 
 Route::get('/admin-only', function () {
