@@ -55,7 +55,50 @@
             color="text-orange-600"
             background="bg-orange-50"
         />
+
+        <x-stat-card label="Published" :value="$publishedProjects"
+            color="text-green-600" background="bg-green-50" />
+
+        <x-stat-card label="Draft" :value="$draftProjects"
+            color="text-orange-600" background="bg-orange-50" />
+
     </div>
+
+    <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="mb-3 text-lg font-semibold text-slate-900">
+            Project per Kategori
+        </h2>
+
+        <ul class="divide-y divide-slate-100">
+            @forelse ($categories as $category)
+                <li class="flex items-center justify-between gap-4 py-3">
+                    <span>{{ $category->name ?: 'Kategori tanpa nama' }}</span>
+                    <span class="font-semibold text-indigo-600">
+                        {{ $category->projects_count }} project
+                    </span>
+                </li>
+            @empty
+                <li class="py-3 text-slate-500">Belum ada kategori.</li>
+            @endforelse
+        </ul>
+    </section>
+
+    <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="mb-3 text-lg font-semibold text-slate-900">Skill Teratas</h2>
+
+        <ul class="divide-y divide-slate-100">
+            @forelse ($topSkills as $skill)
+                <li class="flex items-center justify-between gap-4 py-3">
+                    <span>{{ $skill->name }}</span>
+                    <span class="font-semibold text-indigo-600">
+                        {{ $skill->proficiency }}/100
+                    </span>
+                </li>
+            @empty
+                <li class="py-3 text-slate-500">Belum ada skill.</li>
+            @endforelse
+        </ul>
+    </section>
 
 </div>
 @endsection

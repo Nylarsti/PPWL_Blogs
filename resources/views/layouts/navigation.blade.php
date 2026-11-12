@@ -12,8 +12,8 @@
                         'bg-indigo-50 text-indigo-700' => request()->routeIs('post.dashboard', 'dashboard'),
                         'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => !request()->routeIs('post.dashboard', 'dashboard'),
                     ])>Home</a>
-                <a href="#about" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">About</a>
-                <a href="#education" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">Education</a>
+                <a href="{{ route('experience.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">Experience</a>
+                <a href="{{ route('education.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">Education</a>
                 <a href="{{ route('projects.index') }}"
                     @class([
                         'rounded-lg px-3 py-2 text-sm font-medium transition',
@@ -62,8 +62,8 @@
     <div x-show="open" x-cloak class="border-t border-slate-200 bg-white md:hidden">
         <div class="space-y-1 px-4 py-3">
             <a href="{{ route('post.dashboard') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Home</a>
-            <a href="#about" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">About</a>
-            <a href="#education" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Education</a>
+            <a href="{{ route('experience.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Experience</a>
+            <a href="{{ route('education.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Education</a>
             <a href="{{ route('projects.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Projects</a>
             <a href="{{ route('post.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Posts</a>
             @auth

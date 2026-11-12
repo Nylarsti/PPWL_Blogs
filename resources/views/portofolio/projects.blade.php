@@ -9,11 +9,29 @@
     </a>
 
     <article class="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-        <div class="p-6 sm:p-8">
-            <h1 class="text-3xl font-bold tracking-tight text-slate-900">{{ $project->title }}</h1>
-            <p class="mt-2 text-sm text-slate-500">
-                Kategori: {{ $project->category?->name ?: 'Tanpa kategori' }}
-            </p>
+        <div class="flex items-center justify-between gap-4 p-6 sm:p-8">
+            <div class="min-w-0 flex-1">
+                <h1 class="break-words text-3xl font-bold tracking-tight text-slate-900">
+                    {{ $project->title }}
+                </h1>
+                <p class="mt-2 text-sm text-slate-500">
+                    Kategori: {{ $project->category?->name ?: 'Tanpa kategori' }}
+                </p>
+            </div>
+
+            @if (auth()->user()?->role === 'admin')
+                <a href="{{ route('post.projects.edit', $project) }}"
+                    class="inline-flex shrink-0 items-center gap-2 rounded-lg bg-indigo-600
+                           px-3 py-2.5 text-sm font-semibold text-white shadow-sm
+                           transition-colors hover:bg-indigo-700 sm:px-4">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z" />
+                    </svg>
+                    Edit Project
+                </a>
+            @endif
         </div>
 
         @if ($project->thumbnail)

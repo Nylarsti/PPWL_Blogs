@@ -52,6 +52,19 @@
             </div>
 
             <div>
+                <label for="project_date" class="mb-1 block text-sm font-medium text-gray-700">
+                    Tanggal Proyek
+                </label>
+                <input id="project_date" name="project_date" type="date"
+                    value="{{ old('project_date', $project->project_date ?? '') }}"
+                    class="w-full rounded-lg border-gray-300">
+
+                @error('project_date')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
                 <label for="thumbnail" class="mb-1 block text-sm font-medium text-gray-700">Thumbnail</label>
                 <input id="thumbnail" type="file" name="thumbnail" accept=".jpg,.jpeg,.png,.webp"
                     class="block w-full text-sm text-gray-700">
@@ -73,6 +86,46 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+
+            <div>
+                <label for="status" class="mb-1 block text-sm font-medium text-gray-700">
+                    Status Project
+                </label>
+                <select id="status" name="status" class="w-full rounded-lg border-gray-300">
+                    <option value="draft" @selected(old('status', 'draft') === 'draft')>Draft</option>
+                    <option value="published" @selected(old('status') === 'published')>Published</option>
+                </select>
+                @error('status')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <label>
+                Ringkasan
+                <input name="short_description" maxlength="255" value="{{ old('short_description') }}">
+            </label>
+
+            <label>
+                URL Proyek
+                <input type="url" name="project_url" value="{{ old('project_url') }}">
+            </label>
+
+            <label>
+                URL Repository
+                <input type="url" name="repository_url" value="{{ old('repository_url') }}">
+            </label>
+
+            <fieldset>
+                <legend>Teknologi</legend>
+
+                @foreach ($technologies as $technology)
+                    <label>
+                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}"
+                            @checked(in_array($technology->id, (array) old('technologies', [])))>
+                        {{ $technology->name }}
+                    </label>
+                @endforeach
+            </fieldset>
 
             <button type="submit"
                 class="rounded-lg bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700">
