@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectGalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\ContactAdminController;
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
@@ -55,9 +56,19 @@ Route::prefix('post')->name('post.')->middleware('auth')->group(function () {
         ->middleware('admin')
         ->name('projects.gallery.update');
 
+    
     Route::delete('projects/{project}/gallery/{image}', [ProjectGalleryController::class, 'destroy'])
         ->middleware('admin')
         ->name('projects.gallery.destroy');
+
+    // Admin Contacts
+    Route::get('/contacts', [ContactAdminController::class, 'index'])
+        ->middleware('admin')
+        ->name('contacts.index');
+
+    Route::get('/contacts/{contact}', [ContactAdminController::class, 'show'])
+        ->middleware('admin')
+        ->name('contacts.show');
 });
 
 // Route CRUD Blog Posts (wajib login)

@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Category;
 use App\Models\Technology;
 use App\Models\Skill;
+use App\Models\Contact;
 
 
 class DashboardController extends Controller
@@ -23,6 +24,8 @@ class DashboardController extends Controller
             'latestProjects' => Project::with('category')->latest()->take(5)->get(),
             'publishedProjects' => Project::where('status', 'published')->count(),
             'draftProjects' => Project::where('status', 'draft')->count(),
+            'totalMessages' => Contact::count(),
+            'unreadMessages' => Contact::where('is_read', false)->count(),
         ]);
     }
 }

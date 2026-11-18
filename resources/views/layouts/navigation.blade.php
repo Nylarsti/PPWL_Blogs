@@ -32,6 +32,19 @@
                         'bg-indigo-50 text-indigo-700' => request()->routeIs('profile.*', 'post.profile-saya'),
                         'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => !request()->routeIs('profile.*', 'post.profile-saya'),
                     ])>Profile</a>
+                
+                @auth
+                    @if (Auth::user()->role === 'admin')
+                        <a href="{{ route('post.contacts.index') }}"
+                            @class([
+                                'rounded-lg px-3 py-2 text-sm font-medium transition',
+                                'bg-indigo-50 text-indigo-700' => request()->routeIs('post.contacts.*'),
+                                'text-slate-600 hover:bg-slate-50 hover:text-slate-900' => !request()->routeIs('post.contacts.*'),
+                            ])>
+                            Messages
+                        </a>
+                    @endif
+                @endauth
             </div>
 
             <div class="hidden shrink-0 items-center gap-4 md:flex">
@@ -66,6 +79,14 @@
             <a href="{{ route('education.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Education</a>
             <a href="{{ route('projects.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Projects</a>
             <a href="{{ route('post.index') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Posts</a>
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <a href="{{ route('post.contacts.index') }}"
+                        class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                        Messages
+                    </a>
+                @endif
+            @endauth
             @auth
                 <a href="{{ route('profile.edit') }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Profile</a>
             @endauth

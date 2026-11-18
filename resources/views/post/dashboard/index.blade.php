@@ -62,6 +62,30 @@
         <x-stat-card label="Draft" :value="$draftProjects"
             color="text-orange-600" background="bg-orange-50" />
 
+        {{-- Total Messages --}}
+        <a href="{{ route('post.contacts.index') }}" class="block">
+            <x-stat-card
+                label="Messages"
+                :value="$totalMessages"
+                description="Total pesan yang diterima"
+                icon="mail"
+                color="text-blue-600"
+                background="bg-blue-50"
+            />
+        </a>
+
+        {{-- Unread Messages --}}
+        <a href="{{ route('post.contacts.index') }}" class="block">
+            <x-stat-card
+                label="Unread Messages"
+                :value="$unreadMessages"
+                description="Pesan belum dibaca"
+                icon="mail"
+                color="text-orange-600"
+                background="bg-orange-50"
+            />
+        </a>
+
     </div>
 
     <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
